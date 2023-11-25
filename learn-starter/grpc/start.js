@@ -48,8 +48,8 @@ app.get('/', async (req, res) => {
                 reject(err);
             } else {
                 // 如果操作成功，调用 resolve 函数，并传递操作结果作为参数
-                var aa = response.message + Math.floor((Math.random()*10)+1)*1000;
-                resolve(aa);
+                // var aa = response.message + Math.floor((Math.random()*10)+1)*1000;
+                resolve(response.message);
             }
         });
     }));

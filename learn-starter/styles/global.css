@@ -30,3 +30,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+tr, ul {
+  border: 0;
+  margin: 100;
+  padding: 0;
+}
