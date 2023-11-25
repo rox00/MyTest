@@ -43,9 +43,9 @@ var cbgw_proto = grpc.loadPackageDefinition(packageDefinition).cbgw;
  */
 function GetStatus(call, callback) {
 
-  var num0 = Math.floor(Math.random()*256);
-  var num1 = Math.floor(Math.random()*256);
-  var num2 = Math.floor(Math.random()*256);
+  var num0 = Math.floor(Math.random()*255+1);
+  var num1 = Math.floor(Math.random()*255+1);
+  var num2 = Math.floor(Math.random()*255+1);
   const color = `rgb(${num0}, ${num1}, ${num2})`;
   callback(null, {message: color});
 }

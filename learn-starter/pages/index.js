@@ -8,10 +8,11 @@ export default function Home({ allPostsData1, allPostsData, getAllPostIdsvar }) 
     var [color, setColor] = useState("#9966ff");
     var timer = setTimeout(async () => {
         // color == "#9966ff" ? setColor("orange") : setColor("#9966ff");
-        let result = await fetch('http://localhost:9000').then(res => res.text());//.then(res => res.text())
+        var result = await fetch('http://localhost:9000').then(res => res.text())
+        
         setgrpcdata(result)
         setColor(result)
-    }, 3000)
+    }, 2000)
 
 
     return <>
