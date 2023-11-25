@@ -15,6 +15,7 @@ export default function Home({ allPostsData1, allPostsData, getAllPostIdsvar }) 
 
 
     return <>
+    <div style={{minHeight:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}>
         {/* <MyColor color="#9966ff"></MyColor> */}
         <table>
             <tbody>
@@ -50,5 +51,6 @@ export default function Home({ allPostsData1, allPostsData, getAllPostIdsvar }) 
             color:${color}
         }
         `}</style>
+    </div>
     </>
 }
