@@ -6,8 +6,17 @@
     "configurations": [
 
         {
-            "name": "Launch Start",
-            "program": "${workspaceFolder}/grpc/start.js",
+            "name": "Launch gRPC Server",
+            "program": "${workspaceFolder}/grpc/cbgw_server_dynamic.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Launch gRPC Client",
+            "program": "${workspaceFolder}/grpc/cbgw_client_dynamic.js",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"

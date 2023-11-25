@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 
 const __filenameNew = fileURLToPath(import.meta.url)
 const __dirnameNew = path.dirname(__filenameNew)
-var PROTO_PATH = __dirnameNew + '/../protos/helloworld.proto';
+var PROTO_PATH = __dirnameNew + '/../protos/cbgw.proto';
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
     {
@@ -29,7 +29,7 @@ var packageDefinition = protoLoader.loadSync(
         defaults: true,
         oneofs: true
     });
-var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+var cbgw_proto = grpc.loadPackageDefinition(packageDefinition).cbgw;
 
 app.get('/', async (req, res) => {
 
@@ -37,11 +37,11 @@ app.get('/', async (req, res) => {
     // new Promise(回调函数)，这里的(resolve, reject)就是Promise的回调函数
     const value =  (await new Promise((resolve, reject) => {
         // 在这里执行异步操作
-        var client = new hello_proto.Greeter('localhost:50051',
+        var client = new cbgw_proto.Status('localhost:50051',
             grpc.credentials.createInsecure());
     
-        client.sayHello({ name: 'world' }, function (err, response) {
-            console.log('Greeting:', response.message);
+        client.GetStatus({ request: 'GetStatus' }, function (err, response) {
+            console.log('GetStatus:', response.message);
     
             if (err) {
                 // 如果出现错误，调用 reject 函数，并传递错误原因作为参数

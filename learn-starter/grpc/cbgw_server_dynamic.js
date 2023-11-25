@@ -15,11 +15,19 @@
  * limitations under the License.
  *
  */
+import * as parseArgs from 'minimist';
+import * as grpc from '@grpc/grpc-js';
+import * as protoLoader from '@grpc/proto-loader';
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-var PROTO_PATH = __dirname + '/../helloworld.proto';
 
-var grpc = require('@grpc/grpc-js');
-var protoLoader = require('@grpc/proto-loader');
+
+
+const __filenameNew = fileURLToPath(import.meta.url)
+const __dirnameNew = path.dirname(__filenameNew)
+var PROTO_PATH = __dirnameNew + '/../protos/cbgw.proto';
+
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
     {keepCase: true,
@@ -28,13 +36,18 @@ var packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+var cbgw_proto = grpc.loadPackageDefinition(packageDefinition).cbgw;
 
 /**
  * Implements the SayHello RPC method.
  */
-function sayHello(call, callback) {
-  callback(null, {message: 'Hello ' + call.request.name});
+function GetStatus(call, callback) {
+
+  var num0 = Math.floor(Math.random()*256);
+  var num1 = Math.floor(Math.random()*256);
+  var num2 = Math.floor(Math.random()*256);
+  const color = `rgb(${num0}, ${num1}, ${num2})`;
+  callback(null, {message: color});
 }
 
 /**
@@ -43,7 +56,7 @@ function sayHello(call, callback) {
  */
 function main() {
   var server = new grpc.Server();
-  server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
+  server.addService(cbgw_proto.Status.service, {GetStatus: GetStatus});
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });

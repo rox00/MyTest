@@ -16,9 +16,8 @@
  *
  */
 
-var PROTO_PATH = __dirname + '/../protos/helloworld.proto';
+var PROTO_PATH = __dirname + '/cbgw.proto';
 
-var parseArgs = require('minimist');
 var grpc = require('@grpc/grpc-js');
 var protoLoader = require('@grpc/proto-loader');
 var packageDefinition = protoLoader.loadSync(
@@ -29,28 +28,29 @@ var packageDefinition = protoLoader.loadSync(
      defaults: true,
      oneofs: true
     });
-var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
+var cbgw_proto = grpc.loadPackageDefinition(packageDefinition).cbgw;
 
+/**
+ * Implements the SayHello RPC method.
+ */
+function GetStatus(call, callback) {
+
+  var num0 = Math.floor(Math.random()*256);
+  var num1 = Math.floor(Math.random()*256);
+  var num2 = Math.floor(Math.random()*256);
+  const color = `rgb(${num0}, ${num1}, ${num2})`;
+  callback(null, {message: color});
+}
+
+/**
+ * Starts an RPC server that receives requests for the Greeter service at the
+ * sample server port
+ */
 function main() {
-  var argv = parseArgs(process.argv.slice(2), {
-    string: 'target'
-  });
-  var target;
-  if (argv.target) {
-    target = argv.target;
-  } else {
-    target = 'localhost:50051';
-  }
-  var client = new hello_proto.Greeter(target,
-                                       grpc.credentials.createInsecure());
-  var user;
-  if (argv._.length > 0) {
-    user = argv._[0]; 
-  } else {
-    user = 'world';
-  }
-  client.sayHello({name: user}, function(err, response) {
-    console.log('Greeting:', response.message);
+  var server = new grpc.Server();
+  server.addService(cbgw_proto.Status.service, {GetStatus: GetStatus});
+  server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
+    server.start();
   });
 }
 
