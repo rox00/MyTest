@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "classname": "^0.0.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
+    "dns": "^0.2.2",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "google-protobuf": "^3.21.2",
+    "gray-matter": "^4.0.3",
+    "http-proxy-middleware": "^2.0.6",
+    "http2": "^3.3.7",
+    "minimist": "^1.2.8",
+    "net": "^1.0.2",
+    "next": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "tls": "^0.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@grpc/grpc-js": "^1.9.11",
+    "@grpc/proto-loader": "^0.7.10",
+    "@types/minimist": "^1.2.5",
+    "@types/react": "^18.2.37"
+  }
+}
