@@ -32,9 +32,10 @@ import axios from 'axios';
 export default function Home({ allPostsData1, allPostsData, getAllPostIdsvar }) {
   var [grpcdata, setgrpcdata]= useState(0)
 
-  // var timer = setTimeout(()=>{
-  //   setgrpcdata(grpcdata+1)
-  // }, 1000)
+  var timer = setTimeout(async ()=>{
+    let result = await fetch('http://localhost:9000').then(res => res.text());//.then(res => res.text())
+    setgrpcdata(result)
+  }, 3000)
 
   
   async function grpcclick(event){
