@@ -1,8 +1,11 @@
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import BNMSClientConfig from './BNMSClientConfig.js';
-
-class BNMSClient {
+/** BNMSClient class
+ * 1. get ngbt,kiosk,ntbc,cbgw status from BNMSServer
+ * 2. send json command to BNMSServer for running powershell script
+*/
+export default class BNMSClient {
     constructor() {
         var config = new BNMSClientConfig();
         var packageDefinition = protoLoader.loadSync(
@@ -21,16 +24,11 @@ class BNMSClient {
 
     async GetStatus(jsonrequest) {
         return (await new Promise((resolve, reject) => {
-            // 在这里执行异步操作
             this.client.GetStatus({ request: jsonrequest }, function (err, response) {
-                console.log('GetStatus:', response.message);
-
+                // console.log('GetStatus:', response.message);
                 if (err) {
-                    // 如果出现错误，调用 reject 函数，并传递错误原因作为参数
                     reject(err);
                 } else {
-                    // 如果操作成功，调用 resolve 函数，并传递操作结果作为参数
-                    // var aa = response.message + Math.floor((Math.random()*10)+1)*1000;
                     resolve(response.message);
                 }
             });
@@ -38,8 +36,12 @@ class BNMSClient {
     }
 }
 
+//for test 
 var bnmsclient = new BNMSClient();
-var reply = await bnmsclient.GetStatus('123456');
+
+var obj = { branchNo: "592"};
+var jsonRequest = JSON.stringify(obj);
+var reply = await bnmsclient.GetStatus(jsonRequest);
 reply = '123456';
 
 

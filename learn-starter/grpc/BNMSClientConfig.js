@@ -1,7 +1,9 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-
+/** BNMSClientConfig class
+ * this configuration just for BNMSClient
+*/
 export default class BNMSClientConfig {
     constructor() {
         const __filenameNew = fileURLToPath(import.meta.url)
