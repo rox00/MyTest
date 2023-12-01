@@ -26,6 +26,7 @@ service BNMSStatusSrv {
   // Get Status
   rpc SendStatus (BNMSStatusRequest) returns (BNMSStatusReply) {}
   rpc GetStatus (BNMSStatusRequest) returns (BNMSStatusReply) {}
+  rpc RunCommand (BNMSStatusRequest) returns (BNMSStatusReply) {}
 }
 
 // The request message containing the user's name.

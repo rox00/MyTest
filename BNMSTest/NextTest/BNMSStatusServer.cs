@@ -25,7 +25,15 @@ namespace NextTest
             return Task.FromResult(new BNMSStatusReply
             {
                 Message = "sucess!! "
-            }); ;
+            }); 
+        }
+
+        public override Task<BNMSStatusReply> RunCommand(BNMSStatusRequest request, ServerCallContext context)
+        {
+            return Task.FromResult(new BNMSStatusReply
+            {
+                Message = "sucess!! "
+            });
         }
     }
 }
