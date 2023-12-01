@@ -3,7 +3,7 @@ import styles from './layout.module.css'
 
 export default function Mylayout() {
     return (
-        <div style={{ Height: '300px', width: '500px', display: 'flex', background: 'green' }}>
+        <div style={{ display: 'flex', background: 'green' }}>
             {/* <svg version="1.1"
                     baseProfile="full"
                     width="300" height="200"

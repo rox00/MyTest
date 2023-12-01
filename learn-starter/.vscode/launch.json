@@ -6,6 +6,24 @@
     "configurations": [
 
         {
+            "name": "Launch BNMS Server",
+            "program": "${workspaceFolder}/grpc/bnms_server_dynamic.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Launch BNMS Client",
+            "program": "${workspaceFolder}/grpc/bnms_client_dynamic.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "name": "Launch gRPC Server",
             "program": "${workspaceFolder}/grpc/cbgw_server_dynamic.js",
             "request": "launch",
