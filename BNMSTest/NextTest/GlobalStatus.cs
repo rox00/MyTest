@@ -27,6 +27,13 @@ namespace NextTest
                 return intance;
             }
         }
+        /// <summary>
+        /// by Eric 20230214
+        /// Encrpyt a text by using the 32 bytes key.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private byte[] EncryptAes(string text, string key)
         {
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
@@ -43,6 +50,13 @@ namespace NextTest
                 }
             }
         }
+        /// <summary>
+        /// by Eric 20230214
+        /// Decrypt a text by using the 32 bytes key.
+        /// </summary>
+        /// <param name="encrypted"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private string DecryptAes(byte[] encrypted, string key)
         {
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
@@ -60,6 +74,13 @@ namespace NextTest
             }
 
         }
+        /// <summary>
+        /// by Eric 20230214
+        /// for user login to BNMS on BNMSConsole side.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool Login(string username, string password)
         {
             bool bRet = false;
@@ -89,6 +110,14 @@ namespace NextTest
             return bRet;
         }
 
+        /// <summary>
+        /// by Eric 20230214
+        /// receive Json status from ntbc,cbgw,ngbt(maybe),kiosk(maybe) and save these status to Json Object.
+        /// using the hostname as a unique key for one machine.
+        /// </summary>
+        /// <param name="hostname"></param>
+        /// <param name="o"></param>
+        /// <returns></returns>
         public bool addStatus(string hostname, JObject o)
         {
             bool bRet = false;
@@ -108,6 +137,13 @@ namespace NextTest
             return bRet;
         }
 
+        /// <summary>
+        /// by Eric 20230214
+        /// BNMS Console can use subkey(ex: must be 997 884 cbgw00 AGP01) to query one machine
+        /// or one branch's status.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public string getStatus(JArray array)
         {
             string ret = "";
