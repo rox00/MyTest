@@ -29,48 +29,48 @@ import os from 'os'
 
 
     //********************for SendStatus case*********************
-    // {
-    //     var hostname = os.hostname();
-    //     var requestObj = {
-    //         hostname: hostname,
-    //         status1: 1,
-    //         status2: -1,
-    //         time:Date.now().toString()
-    //     }
-    //     var jsonRequest = JSON.stringify(requestObj);
-    //     var reply = await bnmsclient.SendStatus(jsonRequest);
-    //     var replyObj = JSON.parse(reply);
-    //     if (replyObj.StatusCode == BNMSStatusCode.Success) {
-    //         //for success process
-    //         var message = replyObj.Message
-    //         console.log(message);
-    //     } else {
-    //         //for error process
-    //         var message = replyObj.Message
-    //         console.log(message);
-    //     }
-    // }
+    {
+        var hostname = os.hostname();
+        var requestObj = {
+            hostname: hostname,
+            status1: 1,
+            status2: -1,
+            time:Date.now().toString()
+        }
+        var jsonRequest = JSON.stringify(requestObj);
+        var reply = await bnmsclient.SendStatus(jsonRequest);
+        var replyObj = JSON.parse(reply);
+        if (replyObj.StatusCode == BNMSStatusCode.Success) {
+            //for success process
+            var message = replyObj.Message
+            console.log(message);
+        } else {
+            //for error process
+            var message = replyObj.Message
+            console.log(message);
+        }
+    }
 
 
     //**********************for GetStatus case************************
-    // {
-    //     var hostname = os.hostname();
-    //     var requestObj = {
-    //         key: [hostname,hostname, '888']
-    //     }
-    //     var jsonRequest = JSON.stringify(requestObj);
-    //     var reply = await bnmsclient.GetStatus(jsonRequest);
-    //     var replyObj = JSON.parse(reply);
-    //     if (replyObj.StatusCode == BNMSStatusCode.Success) {
-    //         //for success process
-    //         var message = replyObj.Message
-    //         console.log(message);
-    //     } else {
-    //         //for error process
-    //         var message = replyObj.Message
-    //         console.log(message);
-    //     }
-    // }
+    {
+        var hostname = os.hostname();
+        var requestObj = {
+            key: [hostname,hostname, '888']
+        }
+        var jsonRequest = JSON.stringify(requestObj);
+        var reply = await bnmsclient.GetStatus(jsonRequest);
+        var replyObj = JSON.parse(reply);
+        if (replyObj.StatusCode == BNMSStatusCode.Success) {
+            //for success process
+            var message = replyObj.Message
+            console.log(message);
+        } else {
+            //for error process
+            var message = replyObj.Message
+            console.log(message);
+        }
+    }
 
     //**********************for RunCommand case************************
     {

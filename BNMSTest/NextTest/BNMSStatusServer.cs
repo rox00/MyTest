@@ -26,10 +26,33 @@ namespace NextTest
         }
         public override Task<BNMSStatusReply> Login(BNMSStatusRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new BNMSStatusReply
+            JObject o = JObject.Parse(request.Request);
+            if (o.ContainsKey("username") && o.ContainsKey("password"))
             {
-                Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "not implement!!!")
-            });
+                bool bLogined = GlobalStatus.Intance.Login((string)o["username"],(string)o["password"]);
+
+                if(bLogined)
+                {
+                    return Task.FromResult(new BNMSStatusReply
+                    {
+                        Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Success, "Luckily, Logined!")
+                    });
+                }
+                else
+                {
+                    return Task.FromResult(new BNMSStatusReply
+                    {
+                        Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "Login failed!!!")
+                    });
+                }
+            }
+            else
+            {
+                return Task.FromResult(new BNMSStatusReply
+                {
+                    Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "no 'username' or 'paaword' key !!!")
+                });
+            }
         }
         public override Task<BNMSStatusReply> GetStatus(BNMSStatusRequest request, ServerCallContext context)
         {
@@ -44,11 +67,13 @@ namespace NextTest
                     Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Success, reply)
                 });
             }
-
-            return Task.FromResult(new BNMSStatusReply
+            else
             {
-                Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "Don't contains 'key' key")
-            });
+                return Task.FromResult(new BNMSStatusReply
+                {
+                    Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "No 'key' key!")
+                });
+            }
         }
 
         public override Task<BNMSStatusReply> SendStatus(BNMSStatusRequest request, ServerCallContext context)
@@ -57,18 +82,27 @@ namespace NextTest
             if (o.ContainsKey("hostname"))
             {
                 string hostname = (string)o["hostname"];
-                GlobalStatus.Intance.addStatus(hostname, o);
-
+               if( GlobalStatus.Intance.addStatus(hostname, o))
+                {
+                    return Task.FromResult(new BNMSStatusReply
+                    {
+                        Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Success, "sucess")
+                    });
+                }
+                else
+                {
+                    return Task.FromResult(new BNMSStatusReply
+                    {
+                        Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "SendStatus failed!")
+                    });
+                }
+            }else
+            {
                 return Task.FromResult(new BNMSStatusReply
                 {
-                    Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Success, "sucess")
+                    Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "No 'hostname' key!")
                 });
             }
-
-            return Task.FromResult(new BNMSStatusReply
-            {
-                Message = BNMSStatusServer.GenResultJson(BNMSStatusCode.Error, "Don't contains 'hostname' key")
-            });
         }
 
         public override Task<BNMSStatusReply> RunCommand(BNMSStatusRequest request, ServerCallContext context)
