@@ -11,7 +11,7 @@ export default class BNMSClientConfig {
         var PROTO_PATH = __dirnameNew + '/BNMSStatus.proto';
 
         this.servername = 'localhost';
-        this.serverport = '50051';
+        this.serverport = '8888';
         this.protofile = PROTO_PATH;
       }
 }

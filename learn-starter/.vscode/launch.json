@@ -6,6 +6,15 @@
     "configurations": [
 
         {
+            "name": "Launch BNMS Test",
+            "program": "${workspaceFolder}/grpc/BNMSTest.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "name": "Launch BNMS Server",
             "program": "${workspaceFolder}/grpc/bnms_server_dynamic.js",
             "request": "launch",

@@ -23,7 +23,7 @@ package BNMS;
 
 // The Status service definition.
 service BNMSStatusSrv {
-  // Get Status
+  rpc Login (BNMSStatusRequest) returns (BNMSStatusReply) {}
   rpc SendStatus (BNMSStatusRequest) returns (BNMSStatusReply) {}
   rpc GetStatus (BNMSStatusRequest) returns (BNMSStatusReply) {}
   rpc RunCommand (BNMSStatusRequest) returns (BNMSStatusReply) {}
