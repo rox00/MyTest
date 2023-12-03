@@ -9,10 +9,20 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using log4net;
+using log4net.Config;
+using System.Diagnostics;
+using System.Configuration.Install;
+
+[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+
 namespace NextTest
 {
     internal class Program
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+        private static readonly ILog LogEvents = LogManager.GetLogger("EventLogger");
+
         dynamic server = new BNMSStatusServer();
         static JObject testobject = new JObject();
         private static object _SyncLockObject = new object();
@@ -20,6 +30,26 @@ namespace NextTest
 
         static void Main(string[] args)
         {
+            string source = "BNMS.exe";     //ex display: Source Column
+            string logitem = "MyNewLogs";   //ex display: Application, System ...(folder)
+            if (false == EventLog.Exists(logitem) && false == EventLog.SourceExists(source))
+            {
+                EventLog.CreateEventSource(source, logitem);
+            }
+            else
+            {
+                //EventLog.Delete(log);
+                //EventLog.DeleteEventSource(source);
+                //EventLog.CreateEventSource(source, log);
+            }
+            EventLog.WriteEntry(source, "测试消息");
+            LogEvents.Info("Today is a nice day");
+
+            log.Debug("this is Debug");
+            log.Error("this is Error");
+            LogHelper.Debug("LogHelper Debug");
+            LogHelper.Error("LogHelper Error");
+
             //JArray array= new JArray(); 
             //JObject obj = new JObject();
             //array.Add("123");
