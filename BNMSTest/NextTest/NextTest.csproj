@@ -92,9 +92,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="test.config11111" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="**/*.proto" OutputDir="Protos" GrpcServices="Both" />

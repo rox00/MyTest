@@ -20,8 +20,9 @@ namespace NextTest
 {
     internal class Program
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Program));
-        private static readonly ILog LogEvents = LogManager.GetLogger("EventLogger");
+        private static readonly ILog log = LogManager.GetLogger(typeof(Program)); //get root 
+        private static readonly ILog log1 = LogManager.GetLogger("LogFileLogger");  //get logger
+        private static readonly ILog LogEvents = LogManager.GetLogger("EventLogger"); //get logger
 
         dynamic server = new BNMSStatusServer();
         static JObject testobject = new JObject();
@@ -30,25 +31,27 @@ namespace NextTest
 
         static void Main(string[] args)
         {
-            string source = "BNMS.exe";     //ex display: Source Column
-            string logitem = "MyNewLogs";   //ex display: Application, System ...(folder)
-            if (false == EventLog.Exists(logitem) && false == EventLog.SourceExists(source))
-            {
-                EventLog.CreateEventSource(source, logitem);
-            }
-            else
-            {
-                //EventLog.Delete(log);
-                //EventLog.DeleteEventSource(source);
-                //EventLog.CreateEventSource(source, log);
-            }
-            EventLog.WriteEntry(source, "测试消息");
+            //string source = "BNMS.exe";     //ex display: Source Column
+            //string logitem = "MyNewLogs";   //ex display: Application, System ...(folder)
+            //if (false == EventLog.Exists(logitem) && false == EventLog.SourceExists(source))
+            //{
+            //    EventLog.CreateEventSource(source, logitem);
+            //}
+            //else
+            //{
+            //    //EventLog.Delete(log);
+            //    //EventLog.DeleteEventSource(source);
+            //    //EventLog.CreateEventSource(source, log);
+            //}
+            //EventLog.WriteEntry(source, "测试消息");
             LogEvents.Info("Today is a nice day");
 
             log.Debug("this is Debug");
             log.Error("this is Error");
+            log1.Debug("this is log1 Debug");
+            log1.Error("this is log1 Error");
             LogHelper.Debug("LogHelper Debug");
-            LogHelper.Error("LogHelper Error");
+            //LogHelper.Error("LogHelper Error");
 
             //JArray array= new JArray(); 
             //JObject obj = new JObject();
