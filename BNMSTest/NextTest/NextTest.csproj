@@ -88,14 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="log4net - Copy.configtemp">
+    <None Include="config.ex0">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="test.config11111" />
+    <None Include="config.ex1" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="**/*.proto" OutputDir="Protos" GrpcServices="Both" />
