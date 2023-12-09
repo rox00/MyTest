@@ -13,6 +13,9 @@ using log4net;
 using log4net.Config;
 using System.Diagnostics;
 using System.Configuration.Install;
+using System.Collections.Concurrent;
+using Google.Protobuf.WellKnownTypes;
+using System.Collections;
 
 [assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 
@@ -20,15 +23,16 @@ namespace NextTest
 {
     internal class Program
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Program)); //get root 
-        private static readonly ILog log1 = LogManager.GetLogger("LogFileLogger");  //get logger
-        private static readonly ILog LogEvents = LogManager.GetLogger("EventLogger"); //get logger
+        private static readonly ILog typelog = LogManager.GetLogger(typeof(Program)); //get root 
+        private static readonly ILog filelog = LogManager.GetLogger("LogFileLogger");  //get logger
+        private static readonly ILog EventLog = LogManager.GetLogger("EventLogger"); //get logger
 
         dynamic server = new BNMSStatusServer();
         static JObject testobject = new JObject();
+        static JObject testobject1 = new JObject();
         private static object _SyncLockObject = new object();
         static ReaderWriterLockSlim LogWriteLock = new ReaderWriterLockSlim();
-
+        static bool bret = false;
         static void Main(string[] args)
         {
             //string source = "BNMS.exe";     //ex display: Source Column
@@ -44,12 +48,13 @@ namespace NextTest
             //    //EventLog.CreateEventSource(source, log);
             //}
             //EventLog.WriteEntry(source, "测试消息");
-            LogEvents.Info("Today is a nice day");
+            //EventLog.Info("Today is a nice day");
 
-            log.Debug("this is Debug");
-            log.Error("this is Error");
-            log1.Debug("this is log1 Debug");
-            log1.Error("this is log1 Error");
+            typelog.Info("this is typelog Info");
+            typelog.Debug("this is typelog Debug");
+            typelog.Error("this is typelog Error");
+            filelog.Debug("this is filelog Debug");
+            filelog.Error("this is filelog Error");
             LogHelper.Debug("LogHelper Debug");
             //LogHelper.Error("LogHelper Error");
 
@@ -102,7 +107,7 @@ namespace NextTest
             //    }
             //}).Start();
             //Console.ReadLine();
-
+   
 
             var server = new Server
             {
