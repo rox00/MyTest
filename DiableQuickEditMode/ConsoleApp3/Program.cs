@@ -93,6 +93,7 @@ namespace ConsoleApp3
                 // Wait for all the tasks to finish.
                 Task.WaitAll(tasks.ToArray());
                 string jsonstr = JsonConvert.SerializeObject(retDictionary);
+                var objFromJson = JsonConvert.DeserializeObject<ConcurrentDictionary<int, string>>(jsonstr);
 
                 Dictionary<string,object> dic = new Dictionary<string,object>();
                 dic["statuscode"] = ErrorCode.GenericFailure;
