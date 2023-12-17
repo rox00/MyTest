@@ -1,0 +1,18 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\HKJC\CBN\BNMS\BNMSBcAdm]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\HKJC\CBN\BNMS\BNMSBcAdm\GrpcServer]
+"ServiceName"="DEVSZBSWIN40-0"
+"ServicePortNo"=dword:00001a0a
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\HKJC\CBN\BNMS\BNMSBcAdm\Logger]
+"LogFile"="BNMSBcAdms.log"
+"DebugLogFile"="BNMSBcAdms-debug.log"
+"OutputFilePath"="c:\\LOGS\\BNMS"
+"LogFileLevel"="DEBUG"
+"EventLogLevel"="ERROR"
+"PatternLayout"="%d{yyyy-MM-dd HH:mm:ss.fff} [%type{1}].[%M] [%5p] - %m%n"
+"RollingStyle"=dword:00000001
+"MaximumFileSize"=dword:00000014
+"MaxSizeRollBackups"=dword:00000064
