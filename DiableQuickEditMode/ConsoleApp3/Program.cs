@@ -38,6 +38,7 @@ namespace ConsoleApp3
 
         static void Main(string[] args)
         {
+            Test testclass = new Test();
             Task t = new Task(() =>
             {
                 Console.WriteLine("任务开始工作……");
