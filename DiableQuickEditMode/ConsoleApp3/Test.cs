@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp3
@@ -32,6 +34,34 @@ namespace ConsoleApp3
             }
             //send
             string ret = JsonConvert.SerializeObject(cur);
+
+            Thread backThread = new Thread(() => {
+                try
+                {
+                    while (true)
+                    {
+                        string filepath = "AllBCStatus.json";
+                        if (File.Exists(filepath) == false)
+                        {
+                            var writer = File.CreateText(filepath);
+                            string json = JsonConvert.SerializeObject(cur);
+                            writer.Write(json);
+                            writer.Close();
+                        }
+                        Thread.Sleep(10000);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //for logs;
+                }
+            });
+            backThread.IsBackground = true;
+            backThread.Start();
+
+
+
+            Console.ReadLine();
         }
     }
 }
